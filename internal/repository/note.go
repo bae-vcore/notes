@@ -26,7 +26,7 @@ func NewNoteRepository(db *sql.DB) *noteRepository {
 func (r *noteRepository) GetAllNote() ([]entity.Note, error) {
 	var notes []entity.Note
 
-	rows, err := r.db.Query("SELECT * FROM notes")
+	rows, err := r.db.Query("SELECT * FROM notes ORDER BY id DESC")
 
 	if err != nil {
 		panic(err)

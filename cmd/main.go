@@ -12,6 +12,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
 func main() {
@@ -47,6 +49,12 @@ func main() {
 	v1.Get("/", func(c *fiber.Ctx) error {
 		return c.JSON("Hello World!")
 	})
+
+	// cors
+	app.Use(cors.New())
+
+	// logger
+	app.Use(logger.New())
 
 	// notes
 	v1.Get("/notes", noteHandler.GetAllNote)
